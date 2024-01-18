@@ -23,6 +23,7 @@ class MainActivity : AppCompatActivity() {
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        //Configuramos la RecyclerView
         binding.rvRickAndMorty.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         binding.rvRickAndMorty.adapter = adapter
@@ -31,13 +32,18 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getAllCharacterFromAPI() {
+        //Lanzamos una corrutina en el hilo secundario
         lifecycleScope.launch(Dispatchers.IO) {
+            //Guardamos la llamada en una variable
             val response = APIManager.service.getAllCharacters()
 
+            //Escuchamos si la respuesta fu exitosa
             if (response.isSuccessful) {
                 //Llamaremos al hilo principal y pintemos la interfaz
                 withContext(Dispatchers.Main) {
+                    //Guardamos la respuesta del servidor
                     val body = response.body()
+                    //Comprobamos que no sea nula para pintarla en la RecyclerView y si no mostramos un toast
                     if (body != null) {
                         adapter.submitList(body.results)
                     } else {
@@ -46,6 +52,7 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
             } else {
+                //Si la respuesta fue fallida pasamos al hilo principal y mostramos un toast
                 withContext(Dispatchers.Main) {
                     Toast.makeText(this@MainActivity, "Algo fue mal", Toast.LENGTH_SHORT).show()
                 }
