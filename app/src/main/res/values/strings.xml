@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">UD4_Video Retrofit con Coroutines</string>
+    <string name="btn">botón</string>
 </resources>

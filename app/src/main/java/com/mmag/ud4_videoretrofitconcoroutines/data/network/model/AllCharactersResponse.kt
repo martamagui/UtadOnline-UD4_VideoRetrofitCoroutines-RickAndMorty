@@ -1,4 +1,4 @@
-package com.mmag.ud4_videoretrofitconcoroutines.network.model
+package com.mmag.ud4_videoretrofitconcoroutines.data.network.model
 
 
 import com.google.gson.annotations.SerializedName

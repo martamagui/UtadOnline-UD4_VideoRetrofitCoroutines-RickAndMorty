@@ -1,9 +1,9 @@
-package com.mmag.ud4_videoretrofitconcoroutines.network.model
+package com.mmag.ud4_videoretrofitconcoroutines.data.network.model
 
 
 import com.google.gson.annotations.SerializedName
 
-data class Origin(
+data class Location(
     @SerializedName("name")
     val name: String,
     @SerializedName("url")

@@ -1,4 +1,4 @@
-package com.mmag.ud4_videoretrofitconcoroutines
+package com.mmag.ud4_videoretrofitconcoroutines.ui
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,8 +6,10 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.mmag.ud4_videoretrofitconcoroutines.R
 import com.mmag.ud4_videoretrofitconcoroutines.databinding.ItemCharacterBinding
-import com.mmag.ud4_videoretrofitconcoroutines.network.model.Character
+import com.mmag.ud4_videoretrofitconcoroutines.data.network.model.Character
+import com.mmag.ud4_videoretrofitconcoroutines.utils.loadFromUrl
 
 class CharacterAdapter() :
     ListAdapter<Character, CharacterAdapter.CharacterAdapterViewHolder>(CharacterItemCallBack) {
@@ -22,10 +24,7 @@ class CharacterAdapter() :
         val character = getItem(position)
         holder.binding.tvCharacterName.text = character.name
 
-        Glide.with(holder.binding.root.context)
-            .load(character.image)
-            .placeholder(R.drawable.ic_launcher_background)
-            .into(holder.binding.ivCharacterPhoto)
+        holder.binding.ivCharacterPhoto.loadFromUrl(character.image, holder.binding.root.context)
     }
 
 
